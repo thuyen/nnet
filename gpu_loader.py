@@ -57,7 +57,7 @@ class GpuLoader(object):
                 buffer.put((output, label), block=True)
             buffer.put(None)
 
-        buffer = queue.Queue(maxsize=self.buffer_size)
+        buffer = queue.Queue(maxsize=self.buffer_size-1)
         thread = threading.Thread(target=_thread, args=(self.loader, buffer))
         thread.daemon = True
         thread.start()
