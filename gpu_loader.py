@@ -17,6 +17,7 @@ class GpuLoader(object):
         model (nn.Module): feature extraction network
         loader (dataloader object)
         for_train (bool):  train or validation
+        buffer_size (int): size of the prefetched buffer
         gpu_id (int): gpu that performs feature extraction
 
     Usage:
