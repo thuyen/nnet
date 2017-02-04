@@ -1,7 +1,5 @@
 import torch.utils.data as data
-
 from PIL import Image
-import os
 import os.path
 
 def make_dataset(file_name):
