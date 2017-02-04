@@ -1,3 +1,5 @@
+# adapted from
+# https://github.com/pytorch/vision/blob/master/torchvision/datasets/folder.py
 import torch.utils.data as data
 from PIL import Image
 import os.path
