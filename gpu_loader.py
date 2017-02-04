@@ -9,8 +9,8 @@ else:
 class GpuLoader(object):
     """
     https://github.com/pytorch/pytorch/blob/master/torch/utils/data/dataloader.py
-    Convert a dataloader from above to a gpu dataloader
-    This is useful when we want do feature extraction on a gpu,
+    Convert a dataloader above to a gpu dataloader
+    This is useful when we want to do feature extraction on a gpu,
     buffer the feature and feed it to a model on the main gpu (id=0)
 
     Arguments:
