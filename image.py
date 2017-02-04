@@ -19,7 +19,7 @@ def default_loader(path):
 
 class ImageData(data.Dataset):
     """
-    Caffe ImageData style
+    Caffe style ImageData
     Arguments:
         root: data directory
         list_file: a file name. Each row of the file: image_path classs
