@@ -5,3 +5,4 @@ A collection of tools for training neural networks
   - ImageData: a flexible image dataset
   - BDataLoader: simliar to DataLoader class but initialize the iterator in 
     advance
+  - PEDataLoader: amultiprocess-dataloader that paralles over elements as suppose to over batches (the torch built-in one)
