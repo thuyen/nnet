@@ -5,8 +5,9 @@ else:
     import queue
 import math
 import multiprocessing as mp
-
 import torch
+
+
 class PEDataLoader(object):
     """
     A multiprocess-dataloader that paralles over elements as suppose to
@@ -26,7 +27,6 @@ class PEDataLoader(object):
             batch = self.pool.map(self.dataset, indices)
             batch = self.collate_fn(batch)
             batch = self.pin_memory_fn(batch)
-
             yield batch
 
     def start(self):
@@ -38,7 +38,6 @@ class PEDataLoader(object):
         thread = threading.Thread(target=_thread)
         thread.daemon = True
         thread.start()
-
 
     def __init__(self, dataset, batch_size=1, shuffle=False,
                  num_workers=None, pin_memory=False):
