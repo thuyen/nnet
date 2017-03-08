@@ -55,10 +55,8 @@ class PEDataLoader(object):
 
         self.num_samples = len(dataset)
         self.num_batches = int(math.ceil(self.num_samples / float(self.batch_size)))
-        print(self.num_samples)
 
         self.pool = mp.Pool(num_workers)
-
         self.buffer = queue.Queue(maxsize=1)
         self.start()
 
