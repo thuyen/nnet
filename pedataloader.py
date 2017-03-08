@@ -16,6 +16,25 @@ class PEDataLoader(object):
     Input dataset must be callable with index argument: dataset(index)
     """
 
+    def __init__(self, dataset, batch_size=1, shuffle=False,
+                 num_workers=None, pin_memory=False):
+        self.dataset = dataset
+        self.batch_size = batch_size
+        self.shuffle = shuffle
+        self.num_workers = num_workers
+
+        self.collate_fn = torch.utils.data.dataloader.default_collate
+        self.pin_memory_fn = \
+                torch.utils.data.dataloader.pin_memory_batch if pin_memory else \
+                lambda x: x
+
+        self.num_samples = len(dataset)
+        self.num_batches = int(math.ceil(self.num_samples / float(self.batch_size)))
+
+        self.pool = mp.Pool(num_workers)
+        self.buffer = queue.Queue(maxsize=1)
+        self.start()
+
     def generate_batches(self):
         self.indices = \
                 torch.randperm(self.num_samples).long() if self.shuffle else \
@@ -40,25 +59,6 @@ class PEDataLoader(object):
         thread = threading.Thread(target=_thread)
         thread.daemon = True
         thread.start()
-
-    def __init__(self, dataset, batch_size=1, shuffle=False,
-                 num_workers=None, pin_memory=False):
-        self.dataset = dataset
-        self.batch_size = batch_size
-        self.shuffle = shuffle
-        self.num_workers = num_workers
-
-        self.collate_fn = torch.utils.data.dataloader.default_collate
-        self.pin_memory_fn = \
-                torch.utils.data.dataloader.pin_memory_batch if pin_memory else \
-                lambda x: x
-
-        self.num_samples = len(dataset)
-        self.num_batches = int(math.ceil(self.num_samples / float(self.batch_size)))
-
-        self.pool = mp.Pool(num_workers)
-        self.buffer = queue.Queue(maxsize=1)
-        self.start()
 
     def __next__(self):
         batch = self.buffer.get()
