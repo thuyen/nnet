@@ -11,7 +11,7 @@ import torch
 
 class PEDataLoader(object):
     """
-    A multiprocess-dataloader that paralles over elements as suppose to
+    A multiprocess-dataloader that parallels over elements as suppose to
     over batches (the torch built-in one)
     Input dataset must be callable with index argument: dataset(index)
     """
