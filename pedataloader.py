@@ -13,6 +13,7 @@ class PEDataLoader(object):
     """
     A multiprocess-dataloader that paralles over elements as suppose to
     over batches (the torch built-in one)
+    Input dataset must support callable from index: dataset(index)
     """
 
     def generate_batches(self):
